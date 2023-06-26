@@ -8,6 +8,11 @@ class AccountsController:
     def reset(self):
         self._accounts.clear()
 
+    def add_account(self, ac: Account):
+        if ac.id in self._accounts:
+            raise Exception("Account already exist.")
+        self._accounts[ac.id] = ac
+
     def get_balance(self, id: str):
         if id in self._accounts:
             return self._accounts.get(id).balance
