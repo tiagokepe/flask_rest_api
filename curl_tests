@@ -1,0 +1,43 @@
+curl -X POST http://localhost:5000/reset
+
+curl http://localhost:5000/balance?account_id=1234
+
+curl -X POST -H "Content-Type: application/json" -d '{
+	"type":"deposit",
+	"destination":"100",
+	"amount":10
+}' http://localhost:5000/event
+
+curl -X POST -H "Content-Type: application/json" -d '{
+	"type":"deposit",
+	"destination":"100",
+	"amount":10
+}' http://localhost:5000/event
+
+curl http://localhost:5000//balance?account_id=100
+
+curl -X POST -H "Content-Type: application/json" -d '{
+	"type":"withdraw",
+	"origin":"200",
+	"amount":10
+}' http://localhost:5000/event
+
+curl -X POST -H "Content-Type: application/json" -d '{
+	"type":"withdraw",
+	"origin":"100",
+	"amount":5
+}' http://localhost:5000/event
+
+curl -X POST -H "Content-Type: application/json" -d '{
+	"type":"transfer",
+	"origin":"100",
+	"amount":15,
+	"destination":"300"
+}' http://localhost:5000/event
+
+curl -X POST -H "Content-Type: application/json" -d '{
+	"type":"transfer",
+	"origin":"200",
+	"amount":15,
+	"destination":"300"
+}' http://localhost:5000/event
