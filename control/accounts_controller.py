@@ -19,3 +19,21 @@ class AccountsController:
         else:
             self._accounts[ac.id].balance += ac.balance
         return self._accounts[ac.id]
+
+    def withdraw(self, ac: Account):
+        if ac.id not in self._accounts:
+            raise KeyError("Non-existing account.")
+        self._accounts[ac.id].balance -= ac.balance
+        return self._accounts[ac.id]
+        
+    def transfer(self, origin: Account, destination: Account):
+        if origin.id not in self._accounts:
+            raise KeyError("Non-existing account: %s." % origin.id)
+        self._accounts[origin.id].balance -= origin.balance
+        
+        if destination.id not in self._accounts:
+            self._accounts[destination.id] = destination
+            # raise KeyError("Non-existing account: %d." % destination.id)
+        self._accounts[destination.id].balance += origin.balance
+    
+        return self._accounts[origin.id], self._accounts[destination.id]
